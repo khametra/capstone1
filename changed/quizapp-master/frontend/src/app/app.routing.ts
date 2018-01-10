@@ -11,25 +11,27 @@ import { AuthorComponent } from './authorlogin/authorlogin';
 
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './nav/navbar';
 
 const appRoutes: Routes = [
   {  path: 'quiz', component: QuizComponent },
   {  path: '', component: HomeComponent }, // Default Route,
-  {  path: 'register', component: RegisterComponent // Register Route
-   // canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
+  {  path: 'register', component: RegisterComponent// Register Route
+  //  canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
   },
   {
     path: 'login',
-    component: LoginComponent // Login Route
-   // canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
+    component: LoginComponent// Login Route
+//  canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
   },
   {
     path: 'authorlogin',
-    component: AuthorComponent // Login Route
-   // canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
+    component: AuthorComponent// Login Route
+   //canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
   },
-{path: 'navbar', component: NavbarComponent},
+{path: 'navbar', component: NavbarComponent
+},
+
   { path: '**', component: HomeComponent }
 
 ];

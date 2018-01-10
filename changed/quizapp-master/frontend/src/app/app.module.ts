@@ -8,10 +8,12 @@ import { routing }  from './app.routing';
 import { AppComponent } from './app.component';
 
 
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './nav/navbar';
 
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
+import { QuizService } from './services/quiz.service';
+import { HelperService } from './services/helper.service';
 import { AuthorService } from './services/author.service';
 import { LoginComponent } from './login/login.component';
 import { AuthorComponent } from './authorlogin/authorlogin';
@@ -21,6 +23,7 @@ import { NotAuthGuard } from './guards/notAuth.guard';
 
 import { QuizComponent } from './quiz/quiz.component';
 import { HomeComponent } from './home/home.component';
+//import { NavbarComponent } from './nav/navbar';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     NavbarComponent,
     AuthorComponent
+  //  NavbarComponent
   ],
 
   imports: [
@@ -41,7 +45,7 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     FlashMessagesModule
   ],
-  providers: [AuthService, AuthorService, AuthGuard, NotAuthGuard],
+  providers: [AuthService, AuthorService, AuthGuard, NotAuthGuard, QuizService, HelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

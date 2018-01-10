@@ -3,9 +3,10 @@
   <p class="lead">Welcome to the MEAN Stack Quiz Application by <strong>MEAN HUNTERS</strong></p>
   <div>
      <div>
-    <a  routerLink="/register" class="btn btn-primary">Register</a>
-    <a  routerLink="/login"    class="btn btn-default">Login</a>
-    <a  routerLink="/quiz"     class="btn btn-success">Take Quiz</a>
+       <a *ngIf="authService.loggedIn()" routerLink="/quiz">Take Quiz</a>
+       <a *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Logout</a>
+    <a *ngIf="!authService.loggedIn()" routerLink="/register" class="btn btn-primary">Register</a>
+    <a *ngIf="!authService.loggedIn()" routerLink="/login"    class="btn btn-default">Login</a>
   </div>
   </div>
 </div>
