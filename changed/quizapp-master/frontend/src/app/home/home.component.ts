@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { FlashMessagesModule } from 'angular2-flash-messages/module';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,6 @@ import { Router } from '@angular/router';
 })
 
 export class HomeComponent implements OnInit {
-  firstname = '';
-  lastname = '';
-  mobile = '';
   username = '';
   email = '';
 
@@ -30,10 +28,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
-      this.firstname=profile.user.firstname;
-      this.lastname=profile.user.lastname;
-      this.mobile=profile.user.mobile;
-
      this.username = profile.user.username; // Set username
      this.email = profile.user.email; // Set e-mail
 });
