@@ -8,6 +8,11 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   templateUrl: './navbar.html',
 })
 export class NavbarComponent implements OnInit {
+  firstname = '';
+  lastname = '';
+  mobile = '';
+  username = '';
+  email = '';
 
   constructor(
     public authService: AuthService,
@@ -23,7 +28,14 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.authService.loggedIn());
+    this.authService.getProfile().subscribe(profile => {
+      this.firstname=profile.user.firstname;
+      this.lastname=profile.user.lastname;
+      this.mobile=profile.user.mobile;
+
+     this.username = profile.user.username; // Set username
+     this.email = profile.user.email; // Set e-mail
+});
   }
 
 }

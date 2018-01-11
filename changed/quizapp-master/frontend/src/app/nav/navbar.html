@@ -1,5 +1,6 @@
 <h1>NavBar Works</h1>
   <div class="container">
+    <h3 *ngIf="authService.loggedIn()"> Welcome {{username+'!'}} You Can Take Quiz.</h3>
       <ul>
         <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Home</a></li>
       </ul>

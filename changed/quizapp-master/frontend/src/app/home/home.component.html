@@ -1,6 +1,7 @@
 <div class="jumbotron text-center">
   <h1>QUIZ APPLICATION</h1>
   <p class="lead">Welcome to the MEAN Stack Quiz Application by <strong>MEAN HUNTERS</strong></p>
+  <h3 *ngIf="authService.loggedIn()"> Welcome {{username}}</h3>
   <div>
      <div>
        <a *ngIf="authService.loggedIn()" routerLink="/quiz">Take Quiz</a>

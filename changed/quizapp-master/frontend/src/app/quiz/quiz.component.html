@@ -1,7 +1,11 @@
 <div class="row">
-  <div class="col-md-6">
-    <h3>Quiz Application</h3>
+  <div class="col-md-9">
+    <h3 style="text-align: center">Quiz Application </h3>
   </div>
+  <div class="col-md-3">
+<a *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Logout</a>
+  </div>
+</div>
   <!--
   <div class="col-md-6 text-sm-right">
     Select Quiz:
@@ -12,12 +16,12 @@
   -->
   <br>
   <br>
+  <h3 *ngIf="authService.loggedIn()"> Welcome {{username+'!'}} You Can Start Quiz.</h3>
 
 <div  *ngFor="let quiz of quizes" class="btn-group"  >
   <button (click)="loadQuiz(quiz.id)"> {{ quiz.name }}</button>
 </div>
 
-</div>
 <div id="quiz">
   <h1 class="text-sm-center">{{quiz.name}}</h1>
   <hr />

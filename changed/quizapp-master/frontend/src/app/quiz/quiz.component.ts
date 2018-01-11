@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
-
+import { AuthService } from '../services/auth.service';
 import { QuizService } from '../services/quiz.service';
+import { Router } from '@angular/router';
 import { HelperService } from '../services/helper.service';
 import { Option, Question, Quiz, QuizConfig } from '../../models/index';
 
@@ -12,6 +13,8 @@ import { Option, Question, Quiz, QuizConfig } from '../../models/index';
   providers: [QuizService]
 })
 export class QuizComponent implements OnInit {
+  username = '';
+  email = '';
   quizes: any[];
   quiz: Quiz = new Quiz(null);
   mode = 'quiz';
@@ -37,12 +40,23 @@ export class QuizComponent implements OnInit {
     count: 1
   };
 
-  constructor(private quizService: QuizService,  private location: Location) { }
+  constructor(private quizService: QuizService,  private location: Location,   public authService: AuthService, private router: Router,) { }
 
     ngOnInit() {
     this.quizes = this.quizService.getAll();
     this.quizName = this.quizes[0].id;
     this.loadQuiz(this.quizName);
+
+    this.authService.getProfile().subscribe(profile => {
+     this.username = profile.user.username; // Set username
+     this.email = profile.user.email; // Set e-mail
+});
+   }
+
+   onLogoutClick() {
+     this.authService.logout(); // Logout user
+     //this.flashMessagesService.show('You are logged out', { cssClass: 'alert-info' }); // Set custom flash message
+     this.router.navigate(['/']); // Navigate back to home page
    }
 
   loadQuiz(quizName: string) {
