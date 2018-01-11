@@ -22,3 +22,24 @@
 .btn-group button:hover {
     background-color: #3e8e41;
 }
+
+#head {
+  color: brown;
+}
+
+a {
+  color: brown;
+}
+a:active {
+  color: yellow;
+}
+
+a:hover{
+  color: red;
+}
+
+.quizBox {
+  margin-top: 15px;
+  margin-left: 250px;
+  margin-right: 400px;
+}

@@ -1,21 +1,35 @@
+<a style="float:right; margin-right:20px" *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Logout</a>
+
 <div class="jumbotron text-center">
-  <h1>QUIZ APPLICATION</h1>
+
+
+  <div class="row">
+    <div class="col-md-9">
+  <h1 style="text-align:center; float: right; margin-right: 150px;">QUIZ APPLICATION</h1>
+</div>
+<div class="col-xs-6">
+</div>
+
+</div>
+  <br>
   <p class="lead">Welcome to the MEAN Stack Quiz Application by <strong>MEAN HUNTERS</strong></p>
+  <br>
+
   <h3 *ngIf="authService.loggedIn()"> Welcome {{username}}</h3>
+
   <div>
-     <div>
-       <a *ngIf="authService.loggedIn()" routerLink="/quiz">Take Quiz</a>
-       <a *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Logout</a>
     <a *ngIf="!authService.loggedIn()" routerLink="/register" class="btn btn-primary">Register</a>
-    <a *ngIf="!authService.loggedIn()" routerLink="/login"    class="btn btn-default">Login</a>
-  </div>
+    <a *ngIf="!authService.loggedIn()" routerLink="/login" class="btn btn-default">Login</a>
+    <a *ngIf="!authService.loggedIn()" routerLink="/loginAdmin" class="btn btn-default">Author Registration</a>
+  <a  *ngIf="!authService.loggedIn()" routerLink="/loginAdmin" class="btn btn-default">Author Login</a>
+<a *ngIf="authService.loggedIn()" routerLink="/quiz"><h2>Take Quiz</h2></a>
   </div>
 </div>
 
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src="https://image.flaticon.com/icons/svg/417/417745.svg" alt="placeholder image" width="140" height="140">
+      <img src="https://broadwayinfosys.com/uploads/courses/mongodb.png" alt="placeholder image" width="140" height="140">
       <div class="caption">
         <h3>MongoDB</h3>
         <p>MongoDB is a free and open-source cross-platform document-oriented database program. This NoSQL database program uses JSON-like documents with schemas.</p>
@@ -24,48 +38,40 @@
   </div>
 
   <div class="col-sm-6 col-md-4">
-    <div class=thumbnail> <img src="https://image.flaticon.com/icons/svg/417/417746.svg" alt="Generic placeholder image" width="140" height="140">
+    <div class=thumbnail> <img src="https://rishabh.io/recipes/img/004-express-js.png" alt="Generic placeholder image" width="250" height="140">
       <div class=caption>
-        <h3>ExpressJS</h3>
+        <h3>Express</h3>
         <p>Express.js is a Node.js framework. Node.js is a platform that allows JavaScript to be used outside the Web Browsers, for creating web and network applications.</p>
       </div>
     </div>
   </div>
 
   <div class="col-sm-6 col-md-4">
-    <div class=thumbnail> <img src="https://image.flaticon.com/icons/svg/417/417751.svg" alt="Generic placeholder image" width="140" height="140">
+    <div class=thumbnail> <img src="https://blog.sagipl.com/wp-content/uploads/2017/03/angularjs-logo-300x162.jpg" alt="Generic placeholder image" width="250" height="140">
       <div class=caption>
-        <h3>Angular 2</h3>
-        <p>Angular is a development platform for building mobile and desktop web applications. Ut dignissim eleifend maximus. Ut dignissim eleifend maximus. Ut dignissim eleifend.</p>
+        <h3>Angular</h3>
+        <p>Angular is a development platform for building mobile and desktop web applications. It is a JavaScript framework which extends HTML attributes with Directives, and binds data to HTML with Expressions.</p>
       </div>
     </div>
   </div>
-
+<div class="row" style="margin-left:320px">
   <div class="col-sm-6 col-md-4">
-    <div class=thumbnail> <img src="https://image.flaticon.com/icons/svg/417/417754.svg" alt="Generic placeholder image" width="140" height="140">
+    <div class=thumbnail> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" alt="Generic placeholder image" width="200" height="140">
       <div class=caption>
-        <h3>NodeJS</h3>
+        <h3>Node</h3>
         <p>Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.</p>
       </div>
     </div>
   </div>
 
   <div class="col-sm-6 col-md-4">
-    <div class=thumbnail> <img src="https://image.flaticon.com/icons/svg/417/417768.svg" alt="Generic placeholder image" width="140" height="140">
+    <div class=thumbnail> <img src="https://cdn-images-1.medium.com/max/1600/1*yk5D5cQB3jd7EiPzrDrD5w.png" alt="Generic placeholder image" width="250" height="140">
       <div class=caption>
-        <h3>Lorem Ipsum</h3>
-        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+        <h3>React</h3>
+        <p>React is a JavaScript library for building user interfaces. It is maintained by Facebook, Instagram and a community of individual developers and corporations.</p>
       </div>
     </div>
   </div>
-
-  <div class="col-sm-6 col-md-4">
-    <div class=thumbnail> <img src="https://image.flaticon.com/icons/svg/417/417764.svg" alt="Generic placeholder image" width="140" height="140">
-      <div class=caption>
-        <h3>Lorem Ipsum</h3>
-        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-      </div>
-    </div>
-  </div>
+</div>
 
 </div>

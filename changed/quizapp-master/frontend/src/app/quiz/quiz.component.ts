@@ -17,7 +17,7 @@ export class QuizComponent implements OnInit {
   email = '';
   quizes: any[];
   quiz: Quiz = new Quiz(null);
-  mode = 'quiz';
+  mode = '';
   quizName: string;
   config: QuizConfig = {
     'allowBack': true,
@@ -43,9 +43,10 @@ export class QuizComponent implements OnInit {
   constructor(private quizService: QuizService,  private location: Location,   public authService: AuthService, private router: Router,) { }
 
     ngOnInit() {
+
     this.quizes = this.quizService.getAll();
-    this.quizName = this.quizes[0].id;
-    this.loadQuiz(this.quizName);
+  //  this.quizName = this.quizes[0].id;
+    //this.loadQuiz(this.quizName);
 
     this.authService.getProfile().subscribe(profile => {
      this.username = profile.user.username; // Set username

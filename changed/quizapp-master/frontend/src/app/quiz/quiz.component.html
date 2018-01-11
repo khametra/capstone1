@@ -1,35 +1,36 @@
 <div class="row">
-  <div class="col-md-9">
-    <h3 style="text-align: center">Quiz Application </h3>
-  </div>
-  <div class="col-md-3">
-<a *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Logout</a>
-  </div>
-</div>
-  <!--
-  <div class="col-md-6 text-sm-right">
-    Select Quiz:
-    <select [(ngModel)]="quizName" (change)="loadQuiz(quizName)">
-        <option *ngFor="let quiz of quizes" [value]="quiz.id">{{quiz.name}}</option>
-      </select>
-  </div>
-  -->
-  <br>
-  <br>
-  <h3 *ngIf="authService.loggedIn()"> Welcome {{username+'!'}} You Can Start Quiz.</h3>
+  <a style="margin-left: 20px" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" routerLink="/"><h2>Home</h2></a>
 
-<div  *ngFor="let quiz of quizes" class="btn-group"  >
-  <button (click)="loadQuiz(quiz.id)"> {{ quiz.name }}</button>
+<button style="margin-left: 1180px; margin-top: 6px;"class="btn btn-success"><a *ngIf="authService.loggedIn()" href="#" style="float: right;" (click)="onLogoutClick()">Logout</a></button>
 </div>
+<h1 id="head" style="text-align: center; ">QUIZ APPLICATION </h1>
 
-<div id="quiz">
+
+  <br>
+
+
+  <h3 style="margin: none; text-align: center; color: purple;" *ngIf="authService.loggedIn()"> Welcome {{username+'!'}} You Can Start Quiz.</h3>
+<br>
+<div class="quizBox">
+<div style="text-align: center;" *ngFor="let quiz of quizes" class="btn-group" >
+  <button  style="margin-left: 100px" (click)="loadQuiz(quiz.id)"> {{ quiz.name }}</button>
+</div>
+</div>
+<br>
+<br>
+<div id="quiz" >
+  <div *ngIf="mode!=''">
   <h1 class="text-sm-center">{{quiz.name}}</h1>
   <hr />
+</div>
+<br>
 
-  <div *ngIf="mode=='quiz' && quiz">
+  <div *ngIf="mode!='' && quiz">
     <div *ngFor="let question of filteredQuestions;">
       <div class="badge badge-info">Question {{pager.index + 1}} of {{pager.count}}.</div>
+      <br>
       <h2>{{pager.index + 1}}. <span [innerHTML]="question.name"></span></h2>
+      <br>
       <div class="row text-left options">
         <div class="col-md-6" *ngFor="let option of question.options">
           <div class="option">
@@ -42,7 +43,9 @@
       </div>
     </div>
     <hr />
-    <div class="text-sm-center">
+    <br>
+    <br>
+    <div class="text-sm-center" *ngIf="mode!==''">
       <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0);">First</button>
       <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
       <button class="btn btn-primary" (click)="goTo(pager.index + 1);">Next</button>
@@ -50,6 +53,7 @@
       <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
     </div>
   </div>
+  <br>
 
   <div class="row review" *ngIf="mode=='review'">
     <div class="col-sm-4" *ngFor="let question of quiz.questions; let index = index;">
@@ -71,7 +75,7 @@
     </div>
   </div>
   <hr />
-  <div *ngIf="mode!='result'">
+  <div *ngIf="mode!==''">
     <button class="btn btn-default" (click)="mode = 'review'">Review</button>
     <button class="btn btn-default" (click)="onSubmit();">Submit Quiz</button>
     <button class="btn btn-default" (click)="goBack()">Back</button>
