@@ -1,4 +1,4 @@
-const User = require('../models/author'); // Import User Model Schema
+const Author = require('../models/author'); // Import User Model Schema
 const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
 const config = require('../config/database'); // Import database configuration
 
@@ -7,81 +7,63 @@ module.exports = (router) => {
      Register Route
   ============== */
   router.post('/register', (req, res) => {
-    // Check if firstname was provided
-    if (!req.body.firstname) {
-      res.json({ success: false, message: 'You must provide a firstname' }); // Return error
-    }
-    else{
-      if (!req.body.lastname) {
-        res.json({ success: false, message: 'You must provide a lastname' }); // Return error
-      }
-      else {
-        if (!req.body.mobile) {
-          res.json({ success: false, message: 'You must provide a mobilenumber' }); // Return error
-        }
-        else {
-          if (!req.body.email) {
-            res.json({ success: false, message: 'You must provide an email' }); // Return error
-          }
-          else {
-            if (!req.body.username) {
-              res.json({ success: false, message: 'You must provide a username' }); // Return error
-            }
-            else {
-              if (!req.body.password) {
-                res.json({ success: false, message: 'You must provide a password' }); // Return error
-              }
-              else {
-                let user = new User({
-                  firstname: req.body.firstname,
-                  lastname: req.body.lastname,
-                  mobile: req.body.mobile,
-                  email: req.body.email.toLowerCase(),
-                  username: req.body.username.toLowerCase(),
-                  password: req.body.password
-                });
-                // Save user to database
-                user.save((err) => {
-                  // Check if error occured
-                  if (err) {
-                    // Check if error is an error indicating duplicate account
-                    if (err.code === 11000) {
-                      res.json({ success: false, message: 'Username or e-mail already exists' }); // Return error
+    // Check if email was provided
+    if (!req.body.email) {
+      res.json({ success: false, message: 'You must provide an e-mail' }); // Return error
+    } else {
+      // Check if username was provided
+      if (!req.body.username) {
+        res.json({ success: false, message: 'You must provide a username' }); // Return error
+      } else {
+        // Check if password was provided
+        if (!req.body.password) {
+          res.json({ success: false, message: 'You must provide a password' }); // Return error
+        } else {
+          // Create new user object and apply user input
+          let user = new Author({
+            email: req.body.email.toLowerCase(),
+            username: req.body.username.toLowerCase(),
+            password: req.body.password
+          });
+          // Save user to database
+          user.save((err) => {
+            // Check if error occured
+            if (err) {
+              // Check if error is an error indicating duplicate account
+              if (err.code === 11000) {
+                res.json({ success: false, message: 'Username or e-mail already exists' }); // Return error
+              } else {
+                // Check if error is a validation rror
+                if (err.errors) {
+                  // Check if validation error is in the email field
+                  if (err.errors.email) {
+                    res.json({ success: false, message: err.errors.email.message }); // Return error
+                  } else {
+                    // Check if validation error is in the username field
+                    if (err.errors.username) {
+                      res.json({ success: false, message: err.errors.username.message }); // Return error
                     } else {
-                      // Check if error is a validation rror
-                      if (err.errors) {
-                        // Check if validation error is in the email field
-                        if (err.errors.email) {
-                          res.json({ success: false, message: err.errors.email.message }); // Return error
-                        } else {
-                          // Check if validation error is in the username field
-                          if (err.errors.username) {
-                            res.json({ success: false, message: err.errors.username.message }); // Return error
-                          } else {
-                            // Check if validation error is in the password field
-                            if (err.errors.password) {
-                              res.json({ success: false, message: err.errors.password.message }); // Return error
-                            } else {
-                              res.json({ success: false, message: err }); // Return any other error not already covered
-                            }
-                          }
-                        }
+                      // Check if validation error is in the password field
+                      if (err.errors.password) {
+                        res.json({ success: false, message: err.errors.password.message }); // Return error
                       } else {
-                        res.json({ success: false, message: 'Could not save user. Error: ', err }); // Return error if not related to validation
+                        res.json({ success: false, message: err }); // Return any other error not already covered
                       }
                     }
-                  } else {
-                    res.json({ success: true, message: 'Acount registered!' }); // Return success
                   }
-                });
+                } else {
+                  res.json({ success: false, message: 'Could not save user. Error: ', err }); // Return error if not related to validation
+                }
               }
+            } else {
+              res.json({ success: true, message: 'Acount registered!' }); // Return success
             }
-          }
+          });
         }
       }
-
     }
   });
+
   /* ============================================================
      Route to check if user's email is available for registration
   ============================================================ */
@@ -91,7 +73,7 @@ module.exports = (router) => {
       res.json({ success: false, message: 'E-mail was not provided' }); // Return error
     } else {
       // Search for user's e-mail in database;
-      User.findOne({ email: req.params.email }, (err, user) => {
+      Author.findOne({ email: req.params.email }, (err, user) => {
         if (err) {
           res.json({ success: false, message: err }); // Return connection error
         } else {
@@ -115,8 +97,7 @@ module.exports = (router) => {
       res.json({ success: false, message: 'Username was not provided' }); // Return error
     } else {
       // Look for username in database
-      User.findOne({ username: req.params.username }, (err, user) => {
-        // Check if connection error was found
+      Author.findOne({ username: req.params.username }, (err, user) => { // Check if connection error was found
         if (err) {
           res.json({ success: false, message: err }); // Return connection error
         } else {
@@ -144,7 +125,7 @@ module.exports = (router) => {
         res.json({ success: false, message: 'No password was provided.' }); // Return error
       } else {
         // Check if username exists in database
-        User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+        Author.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
           // Check if error was found
           if (err) {
             res.json({ success: false, message: err }); // Return error
@@ -159,7 +140,14 @@ module.exports = (router) => {
                 res.json({ success: false, message: 'Password invalid' }); // Return error
               } else {
                 const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for client
-                res.json({ success: true, message: 'Success!', token: token, user: { username: user.username } }); // Return success and token to frontend
+                res.json({
+                  success: true,
+                  message: 'Success!',
+                  token: token,
+                  user: {
+                    username: user.username
+                  }
+                }); // Return success and token to frontend
               }
             }
           }
@@ -195,7 +183,7 @@ module.exports = (router) => {
   =============================================================== */
   router.get('/profile', (req, res) => {
     // Search for user in database
-    User.findOne({ _id: req.decoded.userId }).select('username email').exec((err, user) => {
+    Author.findOne({ _id: req.decoded.userId }).select('username email').exec((err, user) => {
       // Check if error connecting
       if (err) {
         res.json({ success: false, message: err }); // Return error
@@ -210,5 +198,30 @@ module.exports = (router) => {
     });
   });
 
+  /* ===============================================================
+     Route to get user's public profile data
+  =============================================================== */
+  router.get('/publicProfile/:username', (req, res) => {
+    // Check if username was passed in the parameters
+    if (!req.params.username) {
+      res.json({ success: false, message: 'No username was provided' }); // Return error message
+    } else {
+      // Check the database for username
+      Author.findOne({ username: req.params.username }).select('username email').exec((err, user) => {
+        // Check if error was found
+        if (err) {
+          res.json({ success: false, message: 'Something went wrong.' }); // Return error message
+        } else {
+          // Check if user was found in the database
+          if (!user) {
+            res.json({ success: false, message: 'Username not found.' }); // Return error message
+          } else {
+            res.json({ success: true, user: user }); // Return the public user's profile data
+          }
+        }
+      });
+    }
+  });
+
   return router; // Return router object to main index.js
-  }
+}

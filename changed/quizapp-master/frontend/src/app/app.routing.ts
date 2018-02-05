@@ -8,10 +8,13 @@ import { NgModule } from '@angular/core';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthorComponent } from './authorlogin/authorlogin';
-
+import {AddquizComponent} from './addquiz/addquiz.component';
+import { AdminComponent } from './author/author.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { NavbarComponent } from './nav/navbar';
+import { ViewQuizComponent } from './adminquiz/viewquiz.component';
+
 
 const appRoutes: Routes = [
   {  path: 'quiz', component: QuizComponent },
@@ -22,8 +25,16 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent// Login Route
-//  canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
+//canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
   },
+  {
+    path: 'admin', component:AdminComponent
+
+  },
+ {
+   path:'author', component:AddquizComponent
+ },
+
   {
     path: 'authorlogin',
     component: AuthorComponent// Login Route
@@ -32,7 +43,8 @@ const appRoutes: Routes = [
 {path: 'navbar', component: NavbarComponent
 },
 
-  { path: '**', component: HomeComponent }
+// { path: '**', component: HomeComponent },
+{ path: 'viewquiz/:id', component: ViewQuizComponent }
 
 ];
 

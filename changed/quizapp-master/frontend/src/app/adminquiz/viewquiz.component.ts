@@ -1,24 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
-import { AuthService } from '../services/auth.service';
+//import { AuthService } from '../services/auth.service';
 import { QuizService } from '../services/quiz.service';
 import { Router } from '@angular/router';
 import { HelperService } from '../services/helper.service';
 import { Option, Question, Quiz, QuizConfig } from '../../models/index';
+import { ActivatedRoute, Params } from "@angular/router";
+import { Observable } from 'rxjs/Rx';
+
 
 @Component({
   selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css'],
+  templateUrl: './viewquiz.component.html',
+  styleUrls: ['./viewquiz.component.css'],
   providers: [QuizService]
 })
-export class QuizComponent implements OnInit {
+
+export class ViewQuizComponent implements OnInit {
   username = '';
   email = '';
   quizes: any[];
   quiz: Quiz = new Quiz(null);
   mode = '';
   quizName: string;
+ 
+
   config: QuizConfig = {
     'allowBack': true,
     'allowReview': true,
@@ -40,43 +46,53 @@ export class QuizComponent implements OnInit {
     count: 1
   };
 
-  constructor(private quizService: QuizService,  private location: Location,   public authService: AuthService, private router: Router,) { }
+ id:any=0;
+
+  constructor(private quizService: QuizService,  private location: Location,   /*public authService: AuthService,*/ private route: ActivatedRoute) { }
 
     ngOnInit() {
-          this.quizService.getquiz().
-                 subscribe(quizes=>{
-                  this.quizes=quizes;
-                 // console.log(this.quizes);
-               });
+
+         this.route.params.forEach((params: Params) => {
+            this.id = +params['id'];
+        });
+
+       this.quizService.get(this.id).subscribe(res => {
+       console.log("responce from server ");
+       console.log(res);
+    
+      this.quiz = new Quiz(res);
+      this.pager.count = this.quiz.questions.length;
+    });
+    this.mode = 'quiz';
 
    // this.quizName = this.quizes[0].id;
      //console.log(this.quizes);
     //this.loadQuiz(this.quizName);
 
-    this.authService.getProfile().subscribe(profile => {
-     this.username = profile.user.username; // Set username
-     this.email = profile.user.email; // Set e-mail
-});
+    //this.authService.getProfile().subscribe(profile => {
+     //this.username = profile.user.username; // Set username
+     //this.email = profile.user.email; // Set e-mail
+//});
    }
 
-    onLogoutClick() {
-     this.authService.logout(); // Logout user
+  //  onLogoutClick() {
+  //    this.authService.logout(); // Logout user
   //    //this.flashMessagesService.show('You are logged out', { cssClass: 'alert-info' }); // Set custom flash message
-     this.router.navigate(['/']); // Navigate back to home page
-   }
+  //    this.router.navigate(['/']); // Navigate back to home page
+  //  }
 
-  loadQuiz(quizName: string) {
-    console.log(quizName);
+//   loadQuiz(quizName: string) {
+//     console.log(quizName);
 
-    this.quizService.get(quizName).subscribe(res => {
-      //console.log("responce from server ");
-      //console.log(res);
-
-      this.quiz = new Quiz(res);
-      this.pager.count = this.quiz.questions.length;
-    });
-    this.mode = 'quiz';
-  }
+//     this.quizService.get(quizName).subscribe(res => {
+//       //console.log("responce from server ");
+//       //console.log(res);
+    
+//       this.quiz = new Quiz(res);
+//       this.pager.count = this.quiz.questions.length;
+//     });
+//     this.mode = 'quiz';
+//   }
 
   get filteredQuestions() {
     return (this.quiz.questions) ?
@@ -108,14 +124,14 @@ export class QuizComponent implements OnInit {
     return question.options.every(x => x.selected === x.isAnswer) ? 'correct' : 'wrong';
   };
 
-  onSubmit() {
-    let answers = [];
-    this.quiz.questions.forEach(x => answers.push({ 'quizId': this.quiz.id, 'questionId': x.id, 'answered': x.answered }));
+//   onSubmit() {
+//     let answers = [];
+//     this.quiz.questions.forEach(x => answers.push({ 'quizId': this.quiz.id, 'questionId': x.id, 'answered': x.answered }));
 
-    // Post your data to the server here. answers contains the questionId and the users' answer.
-    console.log(this.quiz.questions);
-    this.mode = 'result';
-  }
+//     // Post your data to the server here. answers contains the questionId and the users' answer.
+//     console.log(this.quiz.questions);
+//     this.mode = 'result';
+//   }
 
    goBack(): void {
         this.location.back();

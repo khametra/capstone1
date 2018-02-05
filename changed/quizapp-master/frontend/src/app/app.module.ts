@@ -7,7 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { routing }  from './app.routing';
 import { AppComponent } from './app.component';
 
-
+import { AddquizComponent } from './addquiz/addquiz.component';
+import { AdminComponent } from './author/author.component'
 import { NavbarComponent } from './nav/navbar';
 
 import { RegisterComponent } from './register/register.component';
@@ -23,6 +24,8 @@ import { NotAuthGuard } from './guards/notAuth.guard';
 
 import { QuizComponent } from './quiz/quiz.component';
 import { HomeComponent } from './home/home.component';
+import { ViewQuizComponent } from './adminquiz/viewquiz.component';
+
 //import { NavbarComponent } from './nav/navbar';
 
 @NgModule({
@@ -33,7 +36,10 @@ import { HomeComponent } from './home/home.component';
     RegisterComponent,
     LoginComponent,
     NavbarComponent,
-    AuthorComponent
+    AuthorComponent,
+    AddquizComponent,
+    AdminComponent,
+    ViewQuizComponent
   //  NavbarComponent
   ],
 

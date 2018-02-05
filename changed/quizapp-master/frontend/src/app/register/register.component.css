@@ -1,0 +1,17 @@
+label {
+  font-size: 18px;
+}
+form {
+  margin: auto;
+  background: #bbb;
+}
+h1 {
+  background: #08f;
+  color: #000;
+}
+img {
+  float: left;
+}
+ul {
+  color: purple;
+}

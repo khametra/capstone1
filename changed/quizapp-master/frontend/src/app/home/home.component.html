@@ -21,8 +21,10 @@
     <a *ngIf="!authService.loggedIn()" routerLink="/register" class="btn btn-primary">Register</a>
     <a *ngIf="!authService.loggedIn()" routerLink="/login" class="btn btn-default">Login</a>
    <!-- <a *ngIf="!authService.loggedIn()" routerLink="/loginAdmin" class="btn btn-default">Author Registration</a> -->
-  <a  *ngIf="!authService.loggedIn()" routerLink="/loginAdmin" class="btn btn-default">Author Login</a>
+  <a  *ngIf="!authService.loggedIn()" routerLink="/authorlogin" class="btn btn-default">Author Login</a>
+<!--<a  *ngIf="!authService.loggedIn()" routerLink="/authorreg" class="btn btn-default">Author Reg</a>-->
 <a *ngIf="authService.loggedIn()" routerLink="/quiz"><h2>Take Quiz</h2></a>
+
   </div>
 </div>
 

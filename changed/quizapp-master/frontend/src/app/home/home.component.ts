@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { AuthorService } from '../services/author.service';
 import { Router } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages/module';
 
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    public authorService: AuthorService,
     private router: Router,
     //private flashMessagesService: FlashMessagesService
   ) { }
@@ -30,6 +32,10 @@ export class HomeComponent implements OnInit {
     this.authService.getProfile().subscribe(profile => {
      this.username = profile.user.username; // Set username
      this.email = profile.user.email; // Set e-mail
+});
+this.authorService.getProfile().subscribe(profile => {
+ this.username = profile.user.username; // Set username
+ this.email = profile.user.email; // Set e-mail
 });
   }
 

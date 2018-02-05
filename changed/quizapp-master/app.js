@@ -6,6 +6,7 @@ const path = require('path'); // NodeJS Package for file paths
 const authentication = require('./routes/authentication')(router);
 const authorauthentication = require('./routes/authorauthentication')(router);
 
+var admin = require('./routes/admin'); 
 
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -15,8 +16,6 @@ var cors= require('cors');
 
 var util = require('util');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 app.use(cors());
@@ -30,32 +29,31 @@ mongoose.connect(config.uri, (err) => {
   }
 });
 
-var Schema = mongoose.Schema;
+// var Schema = mongoose.Schema;
 
-var quizSchema = new mongoose.Schema({
-      id: Number,
-      name: String,
-      author:String,
-      questions: [{
-           id : Number,
-           question : String,
-           options:  [{
-                 option: String,
-                 correct: String
-            }]
-         }]
-});
+// var quizSchema = new mongoose.Schema({
+//       id: Number,
+//       name: String,
+//       author:String,
+//       questions: [{
+//            id : Number,
+//            question : String,
+//            options:  [{
+//                  option: String,
+//                  correct: String
+//             }]
+//          }]
+// });
 
-var quiz = mongoose.model('quiz',quizSchema,'quizzes');
+// var quiz = mongoose.model('quiz',quizSchema,'quizzes');
 
-app.use(function(req,res,next){
-  req.quiz=quiz;
-  next();
-});
+// app.use(function(req,res,next){
+//   req.quiz=quiz;
+//   next();
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -73,9 +71,10 @@ app.use(express.static(path.join(__dirname, 'frontend','src','app')));
 // middle ware
 app.use(cors({ origin: 'http://localhost:4200' }));
 
-app.use('/',index);
+
 app.use('/authentication', authentication);
 app.use('/authorauthentication', authorauthentication);
+app.use('/admin',admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

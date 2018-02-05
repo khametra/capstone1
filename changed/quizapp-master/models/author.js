@@ -1,88 +1,11 @@
+/* ===================
+   Import Node Modules
+=================== */
 const mongoose = require('mongoose'); // Node Tool for MongoDB
 mongoose.Promise = global.Promise; // Configure Mongoose Promises
 const Schema = mongoose.Schema; // Import Schema from Mongoose
 const bcrypt = require('bcrypt-nodejs'); // A native JS bcrypt library for NodeJS
-//first name checker
-let validFirstNameChecker = (firstname) => {
-  // Check if firstname exists
-  if (!firstname) {
-    return false; // Return error
-  } else {
-    // Regular expression to test for a valid firstname
-    const regExp = new RegExp(/^[A-z]+$/);
-    return regExp.test(firstname); // Return regular expression test results (true or false)
-  }
-};
 
-const firstnameValidators = [
-
-  {
-    validator: validFirstNameChecker,
-    message: 'Must only contain alphabets'
-  }
-];
-
-//LastName checker
-
-let validLastNameChecker = (lastname) => {
-  // Check if lastname exists
-  if (!firstname) {
-    return false; // Return error
-  } else {
-    // Regular expression to test for a valid e-mail
-    const regExp = new RegExp(/^[A-z]+$/);
-    return regExp.test(lastname); // Return regular expression test results (true or false)
-  }
-};
-
-const lastnameValidators = [
-
-  {
-    validator: validLastNameChecker,
-    message: 'Must only contain alphabets'
-  }
-];
-
-//mobile Number checker
-let mobileLengthChecker = (mobile) => {
-  // Check if mobile exists
-  if (!mobile) {
-    return false; // Return error
-  } else {
-    // Check the length of mobile string
-    if (mobile.length!==10) {
-      return false; // Return error if not within proper length
-    } else {
-      return true; // Return as valid e-mail
-    }
-  }
-};
-
-//mobile number checker
-let validMobileChecker = (mobile) => {
-  // Check if mobile exists
-  if (!mobile) {
-    return false; // Return error
-  } else {
-    // Regular expression to test for a valid mobile
-    const regExp = new RegExp(/^[1-10]+$/);
-    return regExp.test(mobile); // Return regular expression test results (true or false)
-  }
-};
-
-// Array of Email Validators
-const mobileValidators = [
-  // First mobile Validator
-  {
-    validator: mobileLengthChecker,
-    message: 'mobile must contain 10 digits'
-  },
-  // Second mobile Validator
-  {
-    validator: validMobileChecker,
-    message: 'Must be a valid number'
-  }
-];
 // Validate Function to check e-mail length
 let emailLengthChecker = (email) => {
   // Check if e-mail exists
@@ -97,8 +20,6 @@ let emailLengthChecker = (email) => {
     }
   }
 };
-
-
 
 // Validate Function to check if valid e-mail format
 let validEmailChecker = (email) => {
@@ -210,9 +131,6 @@ const passwordValidators = [
 
 // User Model Definition
 const authorSchema = new Schema({
-  firstname: {type: String, required: true, validate: firstnameValidators},
-  lastname: {type: String, required: true, validate: lastnameValidators},
-  mobile: {type: String, required: true, validate: mobileValidators},
   email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators }
@@ -233,7 +151,7 @@ authorSchema.pre('save', function(next) {
 });
 
 // Methods to compare password to encrypted password upon login
-authorSchema.methods.comparePassword = function(password){
+authorSchema.methods.comparePassword = function(password) {
   return bcrypt.compareSync(password, this.password); // Return comparison of login password to password in database (true or false)
 };
 

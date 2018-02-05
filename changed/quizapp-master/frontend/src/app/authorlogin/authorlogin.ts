@@ -6,14 +6,13 @@ import { AuthGuard } from '../guards/auth.guard';
 
 @Component({
   selector: 'author-login',
-  templateUrl: './authorlogin.html',
-
+  templateUrl: './authorlogin.html'
 })
 export class AuthorComponent implements OnInit {
   messageClass;
   message;
   processing = false;
-  form: FormGroup;
+  form;
   previousUrl;
 
   constructor(
@@ -74,7 +73,7 @@ export class AuthorComponent implements OnInit {
           if (this.previousUrl) {
             this.router.navigate([this.previousUrl]); // Redirect to page they were trying to view before
           } else {
-            this.router.navigate(['/dashboard']); // Navigate to dashboard view
+            this.router.navigate(['/admin']); // Navigate to dashboard view
           }
         }, 2000);
       }

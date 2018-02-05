@@ -1,4 +1,6 @@
-<h2 class="page-header">Login</h2>
+<body>
+<h2 style=" padding:20px;   background: #888;" class="page-header">Login</h2>
+<br>
 
 <!-- Custom Success/Error Message -->
 <div class="row show-hide-message">
@@ -8,7 +10,7 @@
 </div>
 
 <!-- Login Form -->
-<form [formGroup]="form" (submit)="onLoginSubmit()">
+<form [formGroup]="form" style="width: 500px; padding-left:10px" (submit)="onLoginSubmit()">
 
   <!-- Username Field -->
   <div class="form-group">
@@ -36,3 +38,4 @@
   <!-- Submit Button -->
   <input [disabled]="!form.valid || processing" class="btn btn-primary" type="submit" value="Login" />
 </form>
+</body>

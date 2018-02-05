@@ -21,9 +21,13 @@ module.exports = (router) => {
         } else {
           // Create new user object and apply user input
           let user = new User({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            mobile: req.body.mobile,
             email: req.body.email.toLowerCase(),
             username: req.body.username.toLowerCase(),
             password: req.body.password
+
           });
           // Save user to database
           user.save((err) => {
