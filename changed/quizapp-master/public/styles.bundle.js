@@ -1,15 +1,15 @@
 webpackJsonp([2,4],{
 
-/***/ 346:
+/***/ 317:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(606);
+var content = __webpack_require__(332);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(623)(content, {});
+var update = __webpack_require__(401)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -27,22 +27,22 @@ if(false) {
 
 /***/ }),
 
-/***/ 606:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(607)();
+exports = module.exports = __webpack_require__(333)();
 // imports
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", ""]);
+exports.push([module.i, "h1{\n    color:#740808;\n    font-weight:normal;\n}\nh2{\n    font-weight:normal;\n}\n\nhr{\n    border:none;\n    border-top:1px solid #ddd;\n    background:none;\n    margin:8px 0;\n}\n\n.option{\n    background-color:#cadaee;\n    font-size:20px;\n    padding:10px;\n    margin:3px;\n}\n.option label{\n    font-weight:normal;\n}\n    #quiz .options input[type=checkbox] {\n        background-color:#eee;\n        border:1px solid #ccc;\n        height:22px;\n        width:22px;\n    }\n    \ndiv.review{\n    text-align:center;\n}\ndiv.review > div {\n    cursor:pointer;\n}\n\n.answered {\n    background-color:#ccffcc;\n    border:1px solid #aaeeaa;\n    margin:2px 0;\n    padding:12px;\n}\n\n.not-answered {\n    background-color:#ffcccc;\n    border:1px solid #eeaaaa;\n    margin:2px 0;\n    padding:12px;\n}\n\n.result-question{\n    background-color:#eee;\n    margin:4px;\n    padding:6px;\n}\n\n    \n/* Create Quiz Styles */\n.create-quiz .question {\n    text-align:left;\n}\n.create-quiz input[type=text]{\n    border:1px solid #ddd;\n    width:95%;\n}\n.create-quiz .tb-quiz-name{\n    background-color:#ccffcc;\n    text-align:center;\n}\n\n.create-quiz .tb-desc{\n    background-color:#fff;\n}\n\n.create-quiz .options > div{\n    margin-left:20px;\n}\n.create-quiz .options input[type=checkbox]{\n    border: 1px solid #262626;\n    display: inline-block;\n    height:20px;\n    margin-top:10px;\n    margin-bottom:0;\n    padding:0;\n    width:20px;\n    -webkit-appearance:checkbox;    \n}\n\n@media only screen and (max-width: 480px) {\n    h1,.h1{\n        font-size:22px;\n    }\n    h2,.h2{\n        font-size:20px;\n    }\n    h3,.h3{\n        font-size:18px;\n    }\n    .option {\n        font-size: 16px;\n        padding: 6px;\n    }\n}", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 607:
+/***/ 333:
 /***/ (function(module, exports) {
 
 /*
@@ -99,7 +99,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 623:
+/***/ 401:
 /***/ (function(module, exports) {
 
 /*
@@ -352,13 +352,13 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 627:
+/***/ 404:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(346);
+module.exports = __webpack_require__(317);
 
 
 /***/ })
 
-},[627]);
+},[404]);
 //# sourceMappingURL=styles.bundle.map

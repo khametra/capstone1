@@ -69,7 +69,7 @@ app.use(express.static(path.join(__dirname, 'frontend','src')));
 app.use(express.static(path.join(__dirname, 'frontend','src','app')));
 
 // middle ware
-app.use(cors({ origin: 'http://localhost:4200' }));
+//app.use(cors({ origin: 'http://localhost:4200' }));
 
 
 app.use('/authentication', authentication);
